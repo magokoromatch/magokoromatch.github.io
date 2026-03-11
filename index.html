@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>カタオカコウジ（ぱんこす） | Web Creator Portfolio</title>
+    <meta name="description" content="婚活・ライフスタイルメディア「真心マッチ」運営者、カタオカコウジ（ぱんこす）のポートフォリオ。Webメディア運営、ツール開発、書籍出版などの実績と足跡をまとめています。">
+    
+    <style>
+        :root {
+            --main-color: #2c7a51;
+            --bg-color: #fcfaf8;
+            --text-color: #333;
+            --light-text: #666;
+            --card-bg: #fff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c7a51, #1e5c3a);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 0;
+            padding: 0 20px 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: var(--main-color);
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--main-color);
+            border-radius: 2px;
+        }
+
+        .philosophy-box {
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08); 
+            margin-bottom: 80px;
+            border-left: 8px solid var(--main-color);
+        }
+
+        .philosophy-box p {
+            margin-bottom: 18px;
+            font-size: 15px;
+        }
+
+        .philosophy-box .highlight {
+            font-weight: bold;
+            color: var(--main-color);
+            font-size: 1.15em;
+            background: linear-gradient(transparent 70%, #d4edda 70%);
+            display: inline;
+        }
+
+        /* SNSリンク用のスタイル */
+        .sns-links-container {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px dashed #ccc;
+            text-align: center;
+        }
+        
+        .sns-links-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .sns-links-list a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f4f9f6;
+            color: var(--main-color);
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid #d4edda;
+        }
+
+        .sns-links-list a:hover {
+            background-color: var(--main-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+            align-items: stretch; 
+        }
+
+        .work-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .work-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .work-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #eee;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .work-image {
+            transform: scale(1.05);
+        }
+
+        .work-image-wrapper {
+            overflow: hidden;
+        }
+
+        .work-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .work-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .work-desc {
+            font-size: 14.5px;
+            color: var(--light-text);
+            margin: 0 0 20px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 24px;
+            background-color: var(--main-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn-link:hover {
+            background-color: #1e5c3a;
+        }
+
+        .sub-links {
+            margin: 0 0 20px 0;
+            padding: 0;
+            list-style: none;
+            font-size: 13.5px;
+            flex-grow: 1;
+        }
+
+        .sub-links li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .sub-links a {
+            color: var(--main-color);
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .sub-links a::before {
+            content: '▶';
+            font-size: 10px;
+            margin-right: 6px;
+            margin-top: 3px;
+        }
+
+        .sub-links a:hover {
+            text-decoration: underline;
+        }
+
+        .work-meta {
+            font-size: 13px;
+            color: var(--main-color);
+            font-weight: bold;
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #e8f5e9;
+            border-radius: 20px;
+            align-self: flex-start; 
+            margin-top: auto; 
+        }
+
+        .qualification-box {
+            background-color: #f4f9f6;
+            padding: 50px;
+            border-radius: 16px;
+            margin-bottom: 80px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .qualification-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin-top: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .qualification-img:hover {
+            transform: scale(1.02);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #fff;
+            color: var(--light-text);
+            font-size: 14px;
+            border-top: 1px solid #eaeaea;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="fade-in">
+        <h1 style="font-size: 40px; margin-bottom: 5px;">カタオカ コウジ</h1>
+        
+        <div style="font-size: 20px; font-weight: bold; opacity: 0.9; margin-bottom: 15px; letter-spacing: 2px;">
+            （ぱんこす）
+        </div>
+        
+        <div style="margin-top: 10px; font-size: 16px; letter-spacing: 1px; opacity: 0.9;">Web Creator / Media Operator / App Developer</div>
+    </header>
+
+    <div class="container">
+        
+        <section class="philosophy-box fade-in">
+            <h2 class="section-title" style="margin-bottom: 25px;">About</h2>
+            <p>2016年、会社員をしながら立ち上げた映画レビューサイトから、私のWebクリエイターとしての歩みは始まりました。<br>
+            独学でHTML・CSS・PHPを学び、サイトを育て、売却を経験。その後、法人向けECサイトの立ち上げ等を経て、現在は介護事業に携わりながら「真心マッチ」をはじめとするメディア運営やアプリ開発に力を入れています。</p>
+            <p>長くWebの世界を見てきましたが、利益を優先するあまり、読者の目を誤魔化すようなグレーな手法も確かに存在します。しかし、一人のクリエイターとして、私はそういった手法を絶対に選びません。</p>
+            <p style="text-align: center; margin: 30px 0;">
+                <span class="highlight">YMYL（Your Money or Your Life）<br>誠実・切実に・嘘なく<br>ありのままを見せる</span>
+            </p>
+            <p>正しく誠実な運営を行えば、単なるPV数よりも確かな「購入率（CVR）」が上がります。時代が変わっても、この真理は変わりません。自分の作ったサービスを通じて、画面の向こうの誰かが幸せになってくれること。それが、一人のクリエイターとしての私の最大の喜びです。</p>
+            <p>2026年6月にはECサイトとメディア運用（メディアコマース）で独立し、再び法人化へチャレンジする予定です。以下は、そんな私の足跡となる作品たちです。</p>
+
+            <div class="sns-links-container">
+                <p style="font-weight: bold; color: var(--main-color); margin-bottom: 5px;">＼ Official SNS & Media ／</p>
+                <ul class="sns-links-list">
+                    <li><a href="https://x.com/magokoromatch" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+                    <li><a href="https://www.youtube.com/@magokoromatch" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/magokoromatch/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.tiktok.com/@magokoromatch" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                    <li><a href="https://note.com/magokoromatch" target="_blank" rel="noopener noreferrer">note</a></li>
+                    <li><a href="https://ameblo.jp/magokoromatch/" target="_blank" rel="noopener noreferrer">アメブロ</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="qualification-box fade-in">
+            <h2 class="section-title" style="border: none; padding: 0;">Qualifications <span style="font-size: 16px; font-weight: normal; color: #666;">(E-E-A-Tの担保)</span></h2>
+            <p style="margin-top: 20px;">YMYL領域での執筆・サイト運営において、情報の信頼性を証明するために以下の資格を取得・活用しています。</p>
+            <p style="font-weight: bold; font-size: 1.1em; color: var(--main-color); margin: 20px 0;">
+                認知症ケア / 介護系資格 / メンタル心理カウンセラー / マイクロソフト認定資格
+            </p>
+            <p style="font-size: 14px; color: var(--light-text); font-weight: bold;">※YMYLは資格証明が必須です。医療・福祉関係の資格は、読者へ安全で正確な情報を届けるための強力な基盤となっています。</p>
+            
+            <img src="sikaku.jpg" alt="保有資格の証明" class="qualification-img">
+        </section>
+
+        <h2 class="section-title fade-in">Works & Footprints</h2>
+        
+        <div class="works-grid">
+            
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="rifusutairu.jpg" alt="真心マッチ" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">真心マッチ（ライフスタイル・婚活メディア）</h3>
+                    <p class="work-desc">身内や信頼できる仲間たちと運営している大規模メディア。ニッチワードを的確に狙い、多数の記事で検索上位を獲得。現在はLLMOを意識したツール展開も行い、誠実なサイト運営で高いCVRを維持しています。</p>
+                    <a href="https://magokoro-match.com/" target="_blank" rel="noopener noreferrer" class="btn-link">メインサイトを見る</a>
+                    <div class="work-meta">SEO / チーム運営 / クロスメディア</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="tool.jpg" alt="Webツール開発" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">婚活掲示板・お役立ちWebツール群</h3>
+                    <p class="work-desc" style="margin-bottom: 15px;">ユーザーの課題を直接解決し、楽しんでもらえるフロントエンドツールと掲示板を独学で開発。メディアの付加価値を高め、滞在時間と読者満足度の向上に大きく貢献しています。</p>
+                    
+                    <ul class="sub-links">
+                        <li><a href="https://magokoro-match.com/community/" target="_blank" rel="noopener noreferrer">婚活掲示板</a></li>
+                        <li><a href="https://magokoro-match.com/tool/" target="_blank" rel="noopener noreferrer">婚活に役立つツール（総合）</a></li>
+                        <li><a href="https://magokoro-match.com/matchingapp-tools/" target="_blank" rel="noopener noreferrer">マッチングアプリツール</a></li>
+                        <li><a href="https://magokoro-match.com/shindan/love-animal-test/" target="_blank" rel="noopener noreferrer">恋愛どうぶつ診断</a></li>
+                    </ul>
+                    
+                    <div class="work-meta">PHP / CSS / UI・UX設計</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="shousetu.jpg" alt="書籍出版" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">小説・書籍の出版</h3>
+                    <p class="work-desc" style="margin-bottom: 15px;">Webメディアの枠を超え、実用書や自作小説（まごこも名義）の出版もプロデュース。実用書の表紙モデルはコスト削減のため親戚に依頼しました（ギャラのキッチンジローは未回収）。</p>
+                    
+                    <ul class="sub-links" style="font-size: 12.5px;">
+                        <li><a href="https://amzn.asia/d/0eyFGDHY" target="_blank" rel="noopener noreferrer">小さな勇気が未来になる 優しい婚活術</a></li>
+                        <li><a href="https://amzn.asia/d/05Zpvk5H" target="_blank" rel="noopener noreferrer">やさしい手（小説）</a></li>
+                        <li><a href="https://amzn.asia/d/0eJwgjeb" target="_blank" rel="noopener noreferrer">自分だけの足跡（小説）</a></li>
+                        <li><a href="https://amzn.asia/d/03Tk3JYe" target="_blank" rel="noopener noreferrer">黎明の道（小説）</a></li>
+                        <li><a href="https://amzn.asia/d/02hsmelx" target="_blank" rel="noopener noreferrer">僕はこの場所からはじめてみた（小説）</a></li>
+                    </ul>
+                    
+                    <div class="work-meta">コンテンツ制作 / 出版</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="shousetu.jpg" alt="まごこも文庫" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">まごこも文庫（姉妹サイト）</h3>
+                    <p class="work-desc">真心マッチの姉妹サイトとして、自作小説などを展開。幅広い読者のニーズに応えるためコンテンツの拡充を図り、本サイトと連携しながら強力なメディアネットワークを構築しています。</p>
+                    <a href="https://magokoro.wpx.jp/" target="_blank" rel="noopener noreferrer" class="btn-link">サイトを見る</a>
+                    <div class="work-meta">メディア連携 / コンテンツ制作</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="ec-site.jpg" alt="某法人ECサイト" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">某法人ECサイト（事業売却済）</h3>
+                    <p class="work-desc" style="flex-grow: 1;">2023年に立ち上げたアニメ・ミニチュア販売サイト。ECショップとWordPressを用いたHP制作、SEO特化の記事執筆を一手に担い、検索流入が安定したタイミングで事業譲渡（EXIT）を達成しました。</p>
+                    <div class="work-meta">WordPress / EC構築 / 事業譲渡</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="outieigakan.jpg" alt="おうち映画館" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">おうち映画館（旧 映画レビューサイト）</h3>
+                    <p class="work-desc" style="flex-grow: 1;">2016年に立ち上げた私の原点。ここでHTML・CSS・PHPを独学で習得し、副業から本業へと押し上げました。2022年に無事事業売却を達成した、思い入れの深いプロジェクトです。</p>
+                    <div class="work-meta">サイト構築 / 独学の原点</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="sika.jpg" alt="南の町歯科クリニック" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">南の町歯科クリニック 様</h3>
+                    <p class="work-desc" style="flex-grow: 1;">医療機関の求人特化ページ制作。YMYL領域でも通用する「誠実さ」と「清潔感」を第一に、求職者が安心できる導線を設計し、形にしました。</p>
+                    <div class="work-meta">クライアントワーク / Webデザイン</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="irai.jpg" alt="地域店舗のWeb制作" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">地域密着店舗のWeb制作</h3>
+                    <p class="work-desc" style="flex-grow: 1;">カフェやお弁当屋さんなど、地域で頑張る店舗のWordPressホームページ制作を担当。数は少なくても、直接依頼を受けてお店の魅力をWebで形にした、クリエイターとして誇り高い実績です。</p>
+                    <div class="work-meta">WordPress / ローカルビジネス支援</div>
+                </div>
+            </div>
+
+            <div class="work-card fade-in">
+                <div class="work-image-wrapper">
+                    <img src="app.jpg" alt="アプリ開発" class="work-image">
+                </div>
+                <div class="work-content">
+                    <h3 class="work-title">観賞用クラゲアプリ＆AI開発</h3>
+                    <p class="work-desc" style="flex-grow: 1;">2018〜2019年にかけて運営し、多数のDLを獲得したアプリ。OSアップデートへの対応で一度は休止しましたが、現在は強力な相棒である「AI」と共に、続きをゆっくりと楽しみながら開発を再開しています。</p>
+                    <div class="work-meta">アプリ開発 / AI活用</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2016-2026 Kouji Kataoka. All Rights Reserved.
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+</body>
+</html>
